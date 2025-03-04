@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 UI Clone</title>
+    <style>
+        /* General Styles */
+        body {
+            background: url(./R.jpg) no-repeat center center/cover;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Taskbar */
+        .taskbar {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Taskbar Icons */
+        .taskbar-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding-right: 300px;
+        }
+
+        .taskbar-icons img, .uprow img {
+            width: 32px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .taskbar-icons img:hover, .uprow img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Clock */
+        .clock {
+            color: white;
+            font-size: 14px;
+            width: 90px;
+            text-align: center;
+        }
+
+        /* Start Menu */
+        .start-menu {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            width: 450px;
+            background: rgba(20, 25, 50, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .start-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* Start Menu Items */
+        .start-menu input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+        }
+
+        .menu-icons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .menu-icons img {
+            width: 50px;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+
+        .menu-icons img:hover {
+            transform: scale(1.1);
+        }
+
+        /* uprow options */
+        .uprow {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .uprow-icons {
+            display: none;
+            position: absolute;
+            top: -120px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .uprow-icons img {
+            width: 24px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <div class="taskbar-icons">
+            <img src="./win.png" alt="Start Menu" id="start-btn">
+            <img src="./search.png" alt="Search">
+            <img src="./explore.png" alt="Task View">
+            <img src="./fileExplorer.png" alt="File Explorer">
+            <img src="./edge.png" alt="Edge">
+        </div>
+
+        <!-- uprow options -->
+        <div class="uprow" id="uprow-btn">
+            <img src="./uprow.png" alt="arrow">
+            <div class="uprow-icons" id="icons">
+                <img src="./battery.png" alt="Battery">
+                <img src="./usb.png" alt="USB">
+                <img src="./wifi.png" alt="Wifi">
+                <img src="./sound.png" alt="Sound">
+                <img src="./Bluetooth.png" alt="Bluetooth">
+            </div>
+        </div>
+
+        <!-- Clock -->
+        <div class="clock" id="clock"></div>
+    </div>
+
+    <!-- Start Menu -->
+    <div class="start-menu" id="start-menu">
+        <input type="text" placeholder="Type here to search">
+        <hr>
+        <div class="menu-icons">
+            <img src="./tiktok.png" alt="TikTok">
+            <img src="./whatsapp.png" alt="WhatsApp">
+            <img src="./edge.png" alt="Edge">
+            <img src="./facebook.png" alt="Facebook">
+            <img src="./youtube.png" alt="YouTube">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const startBtn = document.getElementById("start-btn");
+            const startMenu = document.getElementById("start-menu");
+            const uprowBtn = document.getElementById("uprow-btn");
+            const icons = document.getElementById("icons");
+
+            // Toggle Start Menu
+            startBtn.addEventListener("click", function (event) {
+                event.stopPropagation();
+                startMenu.classList.toggle("active");
+            });
+
+            // Hide Start Menu when clicking outside
+            document.addEventListener("click", function (event) {
+                if (!startMenu.contains(event.target) && event.target !== startBtn) {
+                    startMenu.classList.remove("active");
+                }
+            });
+
+            // Toggle Uprow Icons
+            uprowBtn.addEventListener("click", function (event) {
+                event.stopPropagation();
+                icons.style.display = icons.style.display === "flex" ? "none" : "flex";
+            });
+
+            // Hide Uprow Icons when clicking outside
+            document.addEventListener("click", function (event) {
+                if (!uprowBtn.contains(event.target)) {
+                    icons.style.display = "none";
+                }
+            });
+
+            // Clock Function
+            function updateClock() {
+                const now = new Date();
+                const time = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+                const date = now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+                document.getElementById("clock").innerHTML = `${time}<br>${date}`;
+            }
+
+            setInterval(updateClock, 1000);
+            updateClock();
+        });
+    </script>
+
+</body>
+</html>

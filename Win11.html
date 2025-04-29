@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 UI</title>
+    <style>
+       /* General Styles */
+        body {
+            background-image: url(./R.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+         /* Taskbar */
+         .taskbar {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 32px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Taskbar Icons */
+        .taskbar-icons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            padding-right: 360px;
+        }
+
+        .taskbar-icons img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        /* Hover Effect */
+        .taskbar-icons img:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Time & Date */
+        .clock {
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    padding: 4px 10px;
+    margin-right: 18px;
+    line-height: 1.2;
+    border-radius: 4px;
+    transition: background 0.3s ease-in-out;
+}
+
+.clock:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+
+
+        /* Start Menu */
+        .start-menu {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            width: 500px;
+            background: rgba(20, 25, 50, 0.95);
+            border-radius: 15px;
+            padding: 15px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        /* Show Start Menu */
+        .start-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* Search Bar */
+        .start-menu input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            font-size: 16px;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Grid Layout */
+        .menu-icons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        /* App Icons */
+        .menu-icons img {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            cursor: pointer;
+        }
+
+        /* Hover Effect on Apps */
+        .menu-icons img:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        .menu-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .power-btn img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.2s ease;
+        }
+
+        .power-btn img:hover {
+            transform: scale(1.1);
+        }
+
+       
+
+    </style>
+</head>
+<body>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <div class="taskbar-icons">
+            <img src="./win.png" alt="Start Menu" id="start-btn">
+            <img src="./search.png" alt="Search">
+            <img src="./explore.png" alt="Task View">
+            <img src="./team.png" alt="Teams">
+            <img src="./fileExplorer.png" alt="File Explorer">
+            <a href="https://www.edge.com/"><img src="./edge.png" alt="Microsoft Edge"></a>
+            <a href="https://www.microsoft.com/"><img src="./ms store.png" alt="Microsoft Store"></a>
+            <img src="./setting.png" alt="Settings">
+            <a href="https://www.mail.com/"><img src="./mail.png" alt="Mail"></a>
+            <a href="https://www.spotify.com/"><img src="./spotify.png" alt="Spotify"></a>
+        </div>
+
+         <!-- Time & Date Display -->
+         <div class="clock" id="clock"></div>
+    </div>
+
+    <!-- Start Menu -->
+    <div class="start-menu" id="start-menu">
+        <input type="text" placeholder="Type here to search">
+        <hr>
+        <div class="menu-icons">
+            <a href="https://www.tiktok.com/"><img src="./tiktok.png" alt="TikTok"></a>
+            <a href="https://www.whatsapp.com/"><img src="./whatapp.png" alt="WhatsApp"></a>
+            <a href="https://www.edge.com/"><img src="./edge.png" alt="Edge"></a> 
+            <a href="https://www.spreadsheet.com/"><img src="./spreadsheet.png" alt="Spreadsheet"></a>
+            <a href="https://www.facebook.com/"><img src="./facebook.png" alt="Facebook"></a>
+            <a href="https://www.twitter.com/"><img src="./twitter.png" alt="Twitter"></a>
+            <a href="https://www.linkedin.com/"><img src="./linkedin.png" alt="LinkedIn"></a>
+            <a href="https://www.youtube.com/"><img src="./youtube.png" alt="YouTube"></a>
+            <a href="https://www.mail.com/"><img src="./mail.png" alt="Mail"></a>
+            <a href="https://www.spotify.com/"><img src="./spotify.png" alt="spotify"></a>
+        </div>
+        <hr>
+        <h4 style="color: whitesmoke;">Recommended</h4>
+        <div class="menu-icons">
+            <a href="https://www.whatsapp.com/"><img src="./whatapp.png" alt="WhatsApp"></a>
+            <a href="https://www.edge.com/"><img src="./edge.png" alt="Edge"></a> 
+            <a href="https://www.tiktok.com/explore"><img src="./tiktok.png" alt="TikTok"></a>
+            <a href="https://www.facebook.com/"><img src="./facebook.png" alt="Facebook"></a>
+            <a href="https://www.youtube.com/"><img src="./youtube.png" alt="YouTube"></a>
+            <a href="https://www.mail.com/"><img src="./mail.png" alt="Mail"></a>
+        </div>
+        <hr>
+        <div class="menu-footer">
+            <div class="user-info">
+                <img src="./username.png" alt="User" width="30" height="30" background="white">
+                <p style="color: whitesmoke;">Username</p>
+            </div>
+            <div class="power-btn">
+                <img src="./power.png" alt="Power Options">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let startBtn = document.getElementById("start-btn"); // Start button in the taskbar
+            let startMenu = document.getElementById("start-menu"); // Start Menu div
+
+            startBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                startMenu.classList.toggle("active"); // Toggle visibility
+            });
+
+            // Close Start Menu when clicking outside
+            document.addEventListener("click", function (event) {
+                if (!startMenu.contains(event.target) && !startBtn.contains(event.target)) {
+                    startMenu.classList.remove("active");
+                }
+            });
+
+            // Prevent clicks inside the Start Menu from closing it
+            startMenu.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
+        });
+
+        function updateClock() {
+            const now = new Date();
+            const time = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+            const date = now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+            document.getElementById("clock").innerHTML = `${time} <br> ${date}`;
+        }
+
+        // Update time every second
+        setInterval(updateClock, 1000);
+        updateClock(); // Call immediately to avoid delay
+    </script>
+
+</body>
+</html>

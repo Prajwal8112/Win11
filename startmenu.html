@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 Start Menu</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url(./R.jpg);
+            background-size: cover;
+        }
+
+        div {
+            height: 500px;
+            width: 500px;
+            background: rgba(20, 25, 50, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 10px 0;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+        }
+
+        span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        input::placeholder{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text" placeholder="Type here to search">
+        <hr>
+        <section>
+            <img src="./tiktok.png" alt="error" hover="tiktok">
+            <img src="./whatapp.png" alt="error" hover="whatapp">
+            <img src="./edge.png" alt="error" hover="edge">
+            <img src="./spreadsheet.png" alt="error" hover="spreadsheet">
+            <img src="./facebook.png" alt="error" hover="facebook">
+            <img src="./twitter.png" alt="error" hover="twitter">
+            <img src="./linkedin.png" alt="error" hover="linkedin">
+            <img src="./youtube.png" alt="error" hover="youtube">
+            <img src="./mail.png" alt="error" hover="mail">
+            <img src="" alt="error" hover="">
+        </section>
+        <hr>
+        <h4>Recommended</h4>
+        <section>
+            <img src="./whatapp.png" alt="error" hover="">
+            <img src="./edge.png" alt="error" hover="">
+            <img src="./tiktok.png" alt="error" hover="">
+            <img src="./facebook.png" alt="error" hover="">
+            <img src="./youtube.png" alt="error" hover="">
+            <img src="./mail.png" alt="error" hover="">
+        </section>
+        <hr>
+        <footer>
+            <span>
+                <img src="./username.png" alt="User" width="30" height="30">
+                <p>Username</p>
+            </span>
+            <button><img src="./power.png" alt="Power Options" hover="Power"></button>
+        </footer>
+    </div>
+</body>
+</html>
